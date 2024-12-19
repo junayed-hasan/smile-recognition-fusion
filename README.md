@@ -117,6 +117,4 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 ---
 
 **© 2024 Mohammad Junayed Hasan**
-```
 
-Make sure to replace placeholders like `https://github.com/yourusername/D-FuseSmileNet` with the actual repository link before publishing.
