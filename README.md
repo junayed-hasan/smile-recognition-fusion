@@ -14,7 +14,9 @@
 
 ## Background
 
-Spontaneous smile recognition has evolved significantly over the years, from traditional feature-based methods to advanced deep learning techniques. While multi-task learning frameworks like **DeepMarkerNet** improved upon earlier approaches by combining handcrafted D-Marker features with deep networks, they come with some limitations, such as, they are prone to inefficiency as they require careful calibration and tuning of weights during combination. To address this, **D-FuseSmileNet** introduces a comprehensive fusion of handcrafted D-Marker features with automatic features extracted using transformer-based architectures, such as MeshSmileNet. This framework achieves state-of-the-art results across benchmark datasets, offering a powerful solution for spontaneous smile classification.
+Spontaneous smile recognition has several important applications in the fields of psychology, criminology, mental health, customer satisfation prediction, and gauging human emotions. The field has evolved significantly over the years, from traditional feature-based methods (calculating speed, acceleration, amplitude etc. from facial landmark points) to advanced deep learning based automatic techniques. While multi-task learning frameworks like **DeepMarkerNet** improved upon earlier approaches by combining handcrafted D-Marker features with deep networks, they come with some limitations, such as, they are prone to inefficiency as they require careful calibration and tuning of weights during combination. To address this, **D-FuseSmileNet** introduces a comprehensive fusion of handcrafted D-Marker features with automatic features extracted using transformer-based architectures, such as MeshSmileNet. This framework achieves state-of-the-art results across benchmark datasets, offering a powerful solution for spontaneous smile classification.
+
+The following bar plot positions our method in context of all existing methods in spontaneous smile recognition.
 
 ![Performance progression](performance_progression.png)
 ---
@@ -95,7 +97,7 @@ For example:
 ## Reproducing Results
 
 1. **Run Cross-Validation:**
-   - By default, the experiments will run on 10-fold, 10-fold, 9-fold and 7-fold for each of UvA-NEMO, BBC, MMI and SPOS respectively. 
+   - By default, the experiments will run on 10-fold, 10-fold, 9-fold and 7-fold for each of UvA-NEMO, BBC, MMI and SPOS respectively [as per the implementation details subsection of the paper]. 
 
 2. **Save and Load Models:**
    - Models are saved to the `[dataset name]/` folder within each dataset directory. Ensure the `[dataset name]/` folder is writable for saving checkpoints. For example, inside BBC, there is another folder named bbc where the models will be saved.
