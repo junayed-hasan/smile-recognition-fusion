@@ -116,5 +116,5 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ---
 
-**© 2024 Mohammad Junayed Hasan**
+**© 2024 Mohammad Junayed Hasan, Swarali Mahimkar and Prajakta Shevakari**
 
