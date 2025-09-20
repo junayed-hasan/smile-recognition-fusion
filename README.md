@@ -1,120 +1,191 @@
-# D-FuseSmileNet
+# HadaSmileNet: Hadamard Fusion for Facial Emotion Recognition
+
+[![Paper](https://img.shields.io/badge/Paper-ICDM%202025-blue)](link-to-paper-when-available)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![Python](https://img.shields.io/badge/Python-3.8-blue.svg)](https://python.org)
 
 ![Architecture Diagram](fusion_archi.png)
 
+## 🎉 News
+- **August 2025**: Paper accepted at IEEE International Conference on Data Mining (ICDM) 2025
+- **September 2025**: Repository made public for camera-ready submission
+- **Conference Date**: November 12-14, 2025
+
 ## Table of Contents
-1. [Background](#background)
-2. [Repository Structure](#repository-structure)
-3. [Dependencies](#dependencies)
-4. [Getting Started](#getting-started)
-5. [Reproducing Results](#reproducing-results)
-6. [License](#license)
+1. [Abstract](#abstract)
+2. [Key Contributions](#key-contributions)
+3. [Results](#results)
+4. [Repository Structure](#repository-structure)
+5. [Getting Started](#getting-started)
+6. [Reproducing Results](#reproducing-results)
+7. [Citation](#citation)
+8. [License](#license)
 
 ---
 
-## Background
+## Abstract
 
-Spontaneous smile recognition has several important applications in the fields of psychology, criminology, mental health, customer satisfation prediction, and gauging human emotions. The field has evolved significantly over the years, from traditional feature-based methods (calculating speed, acceleration, amplitude etc. from facial landmark points) to advanced deep learning based automatic techniques. While multi-task learning frameworks like **DeepMarkerNet** improved upon earlier approaches by combining handcrafted D-Marker features with deep networks, they come with some limitations, such as, they are prone to inefficiency as they require careful calibration and tuning of weights during combination. To address this, **D-FuseSmileNet** introduces a comprehensive fusion of handcrafted D-Marker features with automatic features extracted using transformer-based architectures, such as MeshSmileNet. This framework achieves state-of-the-art results across benchmark datasets, offering a powerful solution for spontaneous smile classification.
+**HadaSmileNet** introduces a novel feature fusion framework that directly integrates transformer-based representations with physiologically-grounded D-Markers through parameter-free multiplicative interactions for genuine smile recognition. Unlike multi-task learning approaches that require auxiliary task supervision and complex loss balancing, our method achieves optimal performance through direct Hadamard multiplicative fusion while maintaining computational efficiency during inference.
 
-The following bar plot positions our method in context of all existing methods in spontaneous smile recognition.
+**Key Achievements:**
+- 🏆 **State-of-the-art results** on 4 benchmark datasets
+- ⚡ **26% parameter reduction** compared to multi-task alternatives  
+- 🎯 **Statistical significance** with p < 0.001 across all improvements
+- 📊 **99.7% accuracy** on MMI, **100% accuracy** on BBC dataset
 
-![Performance progression](performance_progression.png)
+![Performance Comparison](performance_progression.png)
+
+---
+
+## Key Contributions
+
+1. **Novel Fusion Architecture**: Direct integration of handcrafted D-Marker features with transformer representations through Hadamard multiplicative fusion
+2. **Computational Efficiency**: 26% parameter reduction and simplified training compared to multi-task learning frameworks  
+3. **Comprehensive Evaluation**: Systematic comparison of 15 fusion strategies across 4 benchmark datasets
+4. **Statistical Validation**: Rigorous significance testing demonstrating reliable performance improvements
+5. **Practical Deployment**: Inference-time efficiency suitable for real-time applications
+
+---
+
+## Results
+
+### Performance on Benchmark Datasets
+
+| Dataset   | Accuracy | Improvement | Statistical Significance |
+|-----------|----------|-------------|-------------------------|
+| UvA-NEMO  | **88.7%** | +0.8%      | p < 0.001***           |
+| MMI       | **99.7%** | -           | -                       |
+| SPOS      | **98.5%** | +0.7%      | p < 0.001***           |
+| BBC       | **100%**  | +5.0%      | p < 0.001***           |
+
+### Computational Efficiency
+- **Training Time Reduction**: 42.3% (p < 0.001)
+- **Parameter Reduction**: 26.0% vs DeepMarkerNet
+- **Inference Speed**: Comparable to baseline methods
+
 ---
 
 ## Repository Structure
 
-The repository is organized as follows:
 ```
-.
+HadaSmileNet/
 ├── Code/
-│   ├── BBC/
-│   │   ├── [15 notebooks implementing the fusion methods]
-│   │   ├── dataset/   # Models will be saved here
-│   │   ├── core/      # Supporting Python scripts and utilities
-│   │   ├── labels/    # Cross-validation data for k folds
-│   │   ├── npy/       # Links to required numpy files for the dataset
-│   ├── SPOS/ [same structure as above]
-│   ├── UvA-NEMO/ [same structure as above]
-│   ├── MMI/ [same structure as above]
-├── LICENSE
-├── README.md
+│   ├── BBC/                    # BBC dataset experiments
+│   │   ├── [15 fusion method notebooks]
+│   │   ├── dataset/           # Model checkpoints
+│   │   ├── core/             # Utility scripts
+│   │   ├── labels/           # Cross-validation splits
+│   │   └── npy/             # Dataset numpy files
+│   ├── SPOS/                  # SPOS dataset experiments
+│   ├── UvA-NEMO/             # UvA-NEMO dataset experiments  
+│   └── MMI/                   # MMI dataset experiments
+├── figures/                   # Paper figures and plots
+├── statistical_analysis/     # Statistical significance tests
 ├── requirements.txt
-```
-
----
-
-## Dependencies
-
-This project is built with the following dependencies:
-- Python 3.8
-- `numpy==1.21.5`
-- `Pillow==9.0.1`
-- `dlib==19.24.0`
-- `opencv-python==4.6.0.66`
-- `torch==1.11.0`
-- `torchvision==0.12.0`
-- `vidaug==1.5`
-- `einops==0.6.0`
-- `tqdm==4.64.1`
-- `colorama==0.4.6`
-
-To install the dependencies, run:
-```bash
-pip install -r requirements.txt
+├── LICENSE
+└── README.md
 ```
 
 ---
 
 ## Getting Started
 
-Follow these steps to set up the project and reproduce results:
+### Prerequisites
+- Python 3.8+
+- CUDA-compatible GPU (recommended)
+- 8GB+ RAM
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/junayed-hasan/smile-recognition-fusion.git
-cd smile-recognition-fusion
+git clone https://github.com/junayed-hasan/HadaSmileNet.git
+cd HadaSmileNet
 ```
 
-### 2. Prepare the Dataset
-Each dataset folder (e.g., `BBC`, `SPOS`, `UvA-NEMO`, `MMI`) contains:
-- A `npy/` folder with links to download the required numpy files. Download the datasets and place them in the corresponding `npy/` folders.
-
-### 3. Set Up Environment
-Install the required dependencies:
+### 2. Install Dependencies
 ```bash
 pip install -r requirements.txt
 ```
 
-### 4. Run Experiments
-Each dataset folder contains 15 Jupyter notebooks for the different fusion techniques. You can run these notebooks to reproduce the results for individual methods.
+### 3. Download Datasets
+Each dataset folder contains download instructions in the `npy/` directory. Place the downloaded numpy files in the corresponding dataset folders.
 
-For example:
-- Navigate to the `Code/BBC` folder.
-- Open `concatenation.ipynb` to execute the simple concatenation fusion experiment.
+### 4. Verify Installation
+```bash
+cd Code/BBC
+jupyter notebook concatenation.ipynb  # Test with simple fusion method
+```
 
 ---
 
 ## Reproducing Results
 
-1. **Run Cross-Validation:**
-   - By default, the experiments will run on 10-fold, 10-fold, 9-fold and 7-fold for each of UvA-NEMO, BBC, MMI and SPOS respectively [as per the implementation details subsection of the paper]. 
+### Cross-Validation Setup
+- **UvA-NEMO**: 10-fold cross-validation
+- **BBC**: 10-fold cross-validation  
+- **MMI**: 9-fold cross-validation
+- **SPOS**: 7-fold cross-validation
 
-2. **Save and Load Models:**
-   - Models are saved to the `[dataset name]/` folder within each dataset directory. Ensure the `[dataset name]/` folder is writable for saving checkpoints. For example, inside BBC, there is another folder named bbc where the models will be saved.
+### Running Experiments
 
-3. **Evaluate Fusion Techniques:**
-   - Execute each notebook in the dataset folders (`BBC`, `SPOS`, `UvA-NEMO`, `MMI`) to evaluate all 15 fusion techniques.
+1. **Individual Fusion Methods**:
+   ```bash
+   cd Code/[DATASET_NAME]
+   jupyter notebook [fusion_method].ipynb
+   ```
 
-4. **Performance Comparison:**
-   - Use the provided architecture and techniques to compare with the baseline methods and state-of-the-art benchmarks. Results will be outputted in the console or saved in corresponding directories.
+2. **All 15 Fusion Strategies**:
+   Navigate to each dataset folder and run all notebooks sequentially.
+
+3. **Statistical Analysis**:
+   ```bash
+   cd statistical_analysis
+   python statistical_significance_test.py
+   ```
+
+### Expected Runtime
+- **Single experiment**: ~2-4 hours per dataset
+- **Complete evaluation**: ~8-12 hours for all fusion methods
+- **Hardware**: NVIDIA T4 GPU or equivalent
+
+---
+
+## Citation
+
+If you use this work in your research, please cite:
+
+```bibtex
+@inproceedings{hasan2025hadasmilenet,
+  title={HadaSmileNet: Hadamard fusion of handcrafted and deep-learning features for enhancing facial emotion recognition of genuine smiles},
+  author={Hasan, Mohammad Junayed and Mohammed, Nabeel and Rahman, Shafin},
+  booktitle={Proceedings of the IEEE International Conference on Data Mining (ICDM)},
+  year={2025},
+  organization={IEEE}
+}
+```
+
+---
+
+## Acknowledgments
+
+- IEEE International Conference on Data Mining (ICDM) 2025
+- Johns Hopkins University Computer Science Department
+- North South University Apurba NSU R&D Lab
 
 ---
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ---
 
-**© 2024 Mohammad Junayed Hasan, Swarali Mahimkar and Prajakta Shevakari**
+## Contact
 
+**Mohammad Junayed Hasan**  
+Computer Science Department, Johns Hopkins University  
+📧 junayedhasan100@gmail.com 
+🔗 [GitHub](https://github.com/junayed-hasan)
+
+---
+
+**© 2025 Mohammad Junayed Hasan. Published at IEEE ICDM 2025.**
